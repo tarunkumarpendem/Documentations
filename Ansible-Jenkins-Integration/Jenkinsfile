@@ -3,7 +3,7 @@ pipeline{
     stages{
         stage('clone'){
             agent{
-                label 'ubuntu-ansible'
+                label 'ansible'
             }
             steps{
                 git url: 'https://github.com/tarunkumarpendem/Documentations.git',
@@ -12,7 +12,7 @@ pipeline{
         }
         stage('ansible-playbook'){
             agent{
-                label 'ubuntu-ansible'
+                label 'ansible'
             }
             steps{
                 sh """
