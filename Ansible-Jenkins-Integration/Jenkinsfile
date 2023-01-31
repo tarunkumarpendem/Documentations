@@ -1,0 +1,31 @@
+pipeline{
+    agent{
+        label 'none'
+    }
+    stages{
+        stage('clone'){
+            agent{
+                label 'ubuntu-ansible'
+            }
+            steps{
+                sh """
+                      cd Ansible-Jenkins-Integration/
+                      ansible -i hosts -m ping webserver
+                      ansible-playbook -i hosts.yaml playbook.yaml
+                    """ 
+            }
+        }
+        /*stage('clone'){
+            agent{
+                label 'centos'
+            }
+            steps{
+                sh """
+                      cd Ansible-Jenkins-Integration/
+                      ansible -i hosts -m ping webserver
+                      ansible-playbook -i hosts.yaml playbook.yaml
+                    """  
+            }
+        }*/
+    }
+}

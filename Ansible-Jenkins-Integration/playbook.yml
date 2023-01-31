@@ -1,18 +1,7 @@
-## Integrating Ansible from Jenkins:
-------------------------------------
-### Deploying wildfly using Ansible in Ubuntu 20.04 and Centos7 from Jenkins:
------------------------------------------------------------------------------
-* Create an Ubbuntu and Centos7 node and configure them with ansible master/ansible control node(The server where we install ansible) and then connfigure the nodes in Jenkins to integrate the playbook from Jenkins.
-![Preview](Images/ansible1.png)
-
-
-* Write an ansible playbook for installing Wildfly
-```yaml
----
 --- 
 - name: Installing php.info
   hosts: all 
-  become: yes
+  become: true
   vars:
     php_file_path: ./info.php
     php_file_destination: /var/www/html/info.php
@@ -58,21 +47,8 @@
         state: started
         enabled: yes 
       when:
-        - ansible_facts["distribution"] != "Ubuntu"  
-```
-* Hosts file:
--------------
-```yaml
-all:
-  children:
-    webserver:
-      hosts:
-        # ubuntu
-        172.31.57.93:
-          package_name_1: apache2
-          package_name_2: php
-        # centos
-        172.31.48.132:
-          package_name_1: httpd
-          package_name_2: php
-```
+        - ansible_facts["distribution"] != "Ubuntu"       
+
+        
+        
+              
