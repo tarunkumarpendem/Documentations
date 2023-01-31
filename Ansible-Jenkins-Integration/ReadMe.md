@@ -134,3 +134,6 @@ pipeline{
 }
 ```
 ![Preview](Images/ansible4.png)
+* Then check in the browser
+![Preview](Images/ansible5.png)
+![Preview](Images/ansible6.png)
