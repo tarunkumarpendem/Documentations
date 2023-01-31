@@ -2,10 +2,9 @@
 ------------------------------------
 ### Deploying wildfly using Ansible in Ubuntu 20.04 and Centos7 from Jenkins:
 -----------------------------------------------------------------------------
-* Create an Ubbuntu and Centos7 node and configure them with ansible master/ansible control node(The server where we install ansible) and then connfigure the nodes in Jenkins to integrate the playbook from Jenkins.
+* Create an Ubbuntu and Centos7 node and configure them with ansible master/ansible control node(The server where we install ansible) and then configure the ansible control node in Jenkins to integrate the playbook from Jenkins.
 ![Preview](Images/ansible1.png)
-
-
+![Preview](Images/ansible2.png)
 * Write an ansible playbook for installing Wildfly
 ```yaml
 ---
@@ -76,3 +75,62 @@ all:
           package_name_1: httpd
           package_name_2: php
 ```
+* Then ping the nodes from Jenkins using Jenkinsfile
+```groovy
+pipeline{
+    agent none
+    stages{
+        stage('clone'){
+            agent{
+                label 'ansible'
+            }
+            steps{
+                git url: 'https://github.com/tarunkumarpendem/Documentations.git',
+                    branch: 'main'
+            }
+        }
+        stage('ansible-playbook'){
+            agent{
+                label 'ansible'
+            }
+            steps{
+                sh """
+                      cd Ansible-Jenkins-Integration/
+                      ansible -i hosts.yaml -m ping webserver
+                    """ 
+            }
+        }
+    }
+}
+```
+![Preview](Images/ansible3.png)
+* Then run the playbook from Jenkinsfile
+```groovy
+pipeline{
+    agent none
+    stages{
+        stage('clone'){
+            agent{
+                label 'ansible'
+            }
+            steps{
+                git url: 'https://github.com/tarunkumarpendem/Documentations.git',
+                    branch: 'main'
+            }
+        }
+        stage('ansible-playbook'){
+            agent{
+                label 'ansible'
+            }
+            steps{
+                sh """
+                      cd Ansible-Jenkins-Integration/
+                      ansible -i hosts.yaml -m ping webserver
+                      ansible-playbook -i hosts.yaml playbook.yaml
+                    """ 
+            }
+        }
+    }
+}
+```
+![Preview](Images/ansible4.png)
