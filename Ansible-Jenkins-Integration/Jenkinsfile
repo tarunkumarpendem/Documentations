@@ -8,6 +8,15 @@ pipeline{
                 label 'ubuntu-ansible'
             }
             steps{
+                git url: 'https://github.com/tarunkumarpendem/Documentations.git',
+                    branch: 'main'
+            }
+        }
+        stage('ansible-playbook'){
+            agent{
+                label 'ubuntu-ansible'
+            }
+            steps{
                 sh """
                       cd Ansible-Jenkins-Integration/
                       ansible -i hosts -m ping webserver
