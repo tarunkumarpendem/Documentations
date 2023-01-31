@@ -1,7 +1,5 @@
 pipeline{
-    agent{
-        label 'ubuntu-ansible'
-    }
+    agent none
     stages{
         stage('clone'){
             agent{
