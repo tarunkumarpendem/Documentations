@@ -1,6 +1,6 @@
 ## Integrating Ansible from Jenkins:
 ------------------------------------
-### Deploying wildfly using Ansible in Ubuntu 20.04 and Centos7 from Jenkins:
+### Deploying Lampstack using Ansible in Ubuntu 20.04 and Centos7 from Jenkins:
 -----------------------------------------------------------------------------
 * Create an Ubbuntu and Centos7 node and configure them with ansible master/ansible control node(The server where we install ansible) and then configure the ansible control node in Jenkins to integrate the playbook from Jenkins.
 ![Preview](Images/ansible1.png)
