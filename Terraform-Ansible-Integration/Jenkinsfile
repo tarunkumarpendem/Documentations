@@ -1,0 +1,26 @@
+pipeline{
+    agent none
+    stages{
+        stage('clone'){
+            agent{
+                label 'ansible'
+            }
+            steps{
+                git url: 'https://github.com/tarunkumarpendem/Documentations.git',
+                    branch: 'main'
+            }
+        }
+        stage('terraform'){
+            agent{
+                label 'ansible'
+            }
+            steps{
+                sh """
+                      cd Terraform-Ansible-Integration/
+                      terraform init
+                      terraform apply -var-file="dev.tfvars" -auto-approve
+                    """  
+            }
+        }
+    }
+}
