@@ -88,4 +88,4 @@ phpinfo( );
 ![Preview](./Images/terraform1.png)
 * verfiy in the browser wheather the application is in running condition or not using the public-ip of the node. 
 ![Preview](./Images/terraform2.png)
-![Preview](./Images/terraform2.png)
+![Preview](./Images/terraform3.png)
